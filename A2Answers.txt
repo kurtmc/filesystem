@@ -1,0 +1,11 @@
+Answers:
+1. I was going to assume that the univeristy computes use the ext4 filesystem because it is the default
+file system for many Linux ditros, but I ran the df -T command on the machines you can ssh to make sure.
+It turns out there are 4 filesystem types used (none of them are ext4). They are, ext3, tmpfs, afs and
+cifs.
+
+ext3 has a maximum filename length of 255 bytes
+afs has a maximum filename length of 255 bytes (looking in linux/fs/afs/afs.h, there is a macro called
+AFSNAMEMAX and it is defined as 256 but one of those bytes would have to be null)
+cifs may be limited by the NTFS file name length which is 255 bytes
+(I couldn't find any filename length limit information on tmpfs)
