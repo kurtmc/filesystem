@@ -26,10 +26,18 @@ int main(void)
 	}
 
 	char str[BUFSIZ];
-	while (1) {
-		printf("Enter a file name: ");
-		fgets(str, BUFSIZ, stdin);
-		printf("You entered: %s\n", str);
+	if (isatty(fileno(stdin))) {
+		printf("\nffs> ");
+		while (fgets(str, BUFSIZ, stdin) != NULL) {
+			printf("You entered: %s", str);
+			printf("ffs> ");
+		}
+	} else {
+		printf("\n");
+		while (fgets(str, BUFSIZ, stdin) != NULL) {
+			printf("ffs> %s", str);
+			printf("You entered: %s", str);
+		}
 	}
 	return 0;
 }
