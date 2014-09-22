@@ -5,11 +5,13 @@
 		       *filename, struct stat *buf) */
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 /* Function creates a new directory (if it does not already exist) with path current directory appended with
  * the directory "name", returns 0 on success
  */
-int create_directory(char *name) {
+int create_directory(char *name)
+{
 	char cwd[1024];
 	getcwd(cwd, sizeof(cwd));
 
@@ -27,4 +29,10 @@ int create_directory(char *name) {
 	}
 
 	return 0;
+}
+
+int create_file(char *name)
+{
+	FILE *fp = fopen(name, "ab+");
+	return fclose(fp);
 }
