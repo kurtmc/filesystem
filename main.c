@@ -1,3 +1,9 @@
+/* 
+ * Name: Kurt McAlpine
+ * UPI: kmca733
+ * ID: 2004750
+ */
+
 #include <stdlib.h>
 #include <string.h> /* for strcat */
 #include <stdio.h>

@@ -1,3 +1,7 @@
+Name: Kurt McAlpine
+UPI: kmca733
+ID: 2004750
+
 Answers:
 1. I was going to assume that the univeristy computes use the ext4 filesystem because it is the default
 file system for many Linux ditros, but I ran the df -T command on the machines you can ssh to make sure.
