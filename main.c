@@ -109,6 +109,13 @@ void execute_cmd(char *cmd) {
 		clear_real_dir();
 	} else if (compare_command(PWD, cmd)) {
 		printf("%s\n", get_fake_cwd());
+	} else if (compare_command(RLS, cmd)) {
+		char *rls_cmd;
+		rls_cmd = malloc(FILELEN * sizeof(char));
+		rls_cmd[0] = '\0';
+		strcpy(rls_cmd, "ls -l ");
+		strcat(rls_cmd, get_real_root_dir());
+		system(rls_cmd);
 	}
 }
 
