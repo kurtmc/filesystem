@@ -116,7 +116,10 @@ void execute_cmd(char *cmd) {
 		strcpy(rls_cmd, "ls -l ");
 		strcat(rls_cmd, get_real_root_dir());
 		system(rls_cmd);
+	} else if (compare_command(QUIT, cmd)) {
+		exit(0);
 	}
+
 }
 
 int main(void)
