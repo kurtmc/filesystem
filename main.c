@@ -107,6 +107,8 @@ void execute_cmd(char *cmd) {
 		}
 	} else if (compare_command(CLEAR, cmd)) {
 		clear_real_dir();
+	} else if (compare_command(PWD, cmd)) {
+		printf("%s\n", get_fake_cwd());
 	}
 }
 
