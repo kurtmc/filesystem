@@ -6,3 +6,6 @@
 A2com
 # Fake directory name
 A2dir
+
+#Vim files
+*.swp
