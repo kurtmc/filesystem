@@ -1,3 +1,6 @@
 # GCC generated files
 *.out
 *.o
+
+# Executable name
+A2com
