@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <dirent.h> /* for struct dirnet */
 
 #include "fileutils.h"
 
@@ -53,14 +54,39 @@ static char *get_fake_cwd()
 	return fake_cwd;
 }
 
+int clear_real_dir()
+{
+	struct dirent *next_file;
+
+	DIR *real_dir;
+
+	char *file_path;
+	file_path = malloc(FILELEN * sizeof(char));
+
+	real_dir = opendir(get_real_root_dir());
+
+	while (next_file = readdir(real_dir)) {
+		sprintf(file_path, "%s/%s", get_real_root_dir(),
+				next_file->d_name);
+		if (next_file->d_name[0] != '.')
+			remove(file_path);
+	}
+	closedir(real_dir);
+	return 0;
+}
+
+int compare_command(char *command, char *str)
+{
+	return strncmp(command, str, strlen(command)) == 0;
+}
+
 void execute_cmd(char *cmd) {
 	if (cmd != NULL && strlen(cmd) > 0) {
 		cmd[strlen(cmd) - 1] = '\0';
 	} else {
 		return;
 	}
-	if (strncmp(CREATE, cmd, strlen(CREATE)) == 0
-			&& cmd[strlen(CREATE)] == ' ') {
+	if (compare_command(CREATE, cmd)) {
 		/* Remove the command from the front of the string */
 		char *filename = cmd + strlen(CREATE) + 1;
 		if (filename[0] == '-') { /* Absolute */
@@ -79,6 +105,8 @@ void execute_cmd(char *cmd) {
 			strcat(full_name, filename);
 			create_file(full_name);
 		}
+	} else if (compare_command(CLEAR, cmd)) {
+		clear_real_dir();
 	}
 }
 
@@ -86,6 +114,7 @@ int main(void)
 {
 	/* Initially check if the "A2dir" directory exists and if it doesn't
 	 * create it */
+	create_directory(A2DIR);
 	char str[BUFSIZ];
 	if (isatty(fileno(stdin))) {
 		printf("\nffs> ");
