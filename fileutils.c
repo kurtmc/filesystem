@@ -6,6 +6,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+/* Function creates a new directory (if it does not already exist) with path current directory appended with
+ * the directory "name", returns 0 on success
+ */
 int create_directory(char *name) {
 	char cwd[1024];
 	getcwd(cwd, sizeof(cwd));
@@ -20,6 +23,8 @@ int create_directory(char *name) {
 	struct stat st = {0};
 
 	if (stat(full_path, &st) == -1) {
-		    mkdir(full_path, 0700);
+		    return mkdir(full_path, 0700);
 	}
+
+	return 0;
 }
