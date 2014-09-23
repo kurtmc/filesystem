@@ -1,0 +1,12 @@
+void pwd();
+void cd();
+void ls();
+void rls();
+void tree();
+void clear();
+void create(char *filename);
+void add();
+void cat();
+void delete();
+void dd();
+void quit();

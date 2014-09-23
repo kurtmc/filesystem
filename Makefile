@@ -4,8 +4,8 @@
 
 CC=gcc
 CFLAGS=-I. -lm
-DEPS = main.h fileutils.h
-OBJ = main.o fileutils.o
+DEPS = main.h fileutils.h commands.h
+OBJ = main.o fileutils.o commands.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
