@@ -86,14 +86,13 @@ int main(void)
 	create_directory(A2DIR);
 	char str[BUFSIZ];
 	if (isatty(fileno(stdin))) {
-		printf("\nffs> ");
+		printf("ffs> ");
 		while (fgets(str, BUFSIZ, stdin) != NULL) {
 			//printf("You entered: %s", str);
 			execute_cmd(str);
 			printf("ffs> ");
 		}
 	} else {
-		printf("\n");
 		while (fgets(str, BUFSIZ, stdin) != NULL) {
 			printf("ffs> %s", str);
 			execute_cmd(str);
