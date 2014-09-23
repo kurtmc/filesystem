@@ -1,0 +1,11 @@
+clear
+create -one-two-thr ee
+ls
+rls
+cd one-two
+ls
+create fo ur-five
+ls
+ls fo ur
+rls
+quit

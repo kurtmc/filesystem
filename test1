@@ -1,3 +1,4 @@
+clear
 ls
-ls -l
 rls
+quit
