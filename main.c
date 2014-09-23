@@ -47,21 +47,34 @@ void execute_cmd(char *cmd) {
 	} else {
 		return;
 	}
-	if (compare_command(CREATE, cmd)) {
-		char *filename = get_args(CREATE, cmd);
-		create(filename);
-	} else if (compare_command(CLEAR, cmd)) {
-		clear();
-	} else if (compare_command(PWD, cmd)) {
+
+	/* Execute corresponding command */
+	if (compare_command(PWD, cmd)) {
 		pwd();
-	} else if (compare_command(RLS, cmd)) {
-		rls();
-	} else if (compare_command(QUIT, cmd)) {
-		quit();
+	} else if (compare_command(CD, cmd)) {
+		cd();
 	} else if (compare_command(LS, cmd)) {
 		ls();
+	} else if (compare_command(RLS, cmd)) {
+		rls();
+	} else if (compare_command(TREE, cmd)) {
+		tree();
+	} else if (compare_command(CLEAR, cmd)) {
+		clear();
+	} else if (compare_command(CREATE, cmd)) {
+		char *filename = get_args(CREATE, cmd);
+		create(filename);
+	} else if (compare_command(ADD, cmd)) {
+		add();
+	} else if (compare_command(CAT, cmd)) {
+		cat();
+	} else if (compare_command(DELETE, cmd)) {
+		delete();
+	} else if (compare_command(DD, cmd)) {
+		dd();
+	} else if (compare_command(QUIT, cmd)) {
+		quit();
 	}
-
 }
 
 int main(void)
