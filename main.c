@@ -25,10 +25,21 @@
 #define DD "dd"
 #define QUIT "quit"
 
+#define LSTR 1024
+
 int compare_command(char *command, char *str)
 {
 	return strncmp(command, str, strlen(command)) == 0;
 }
+
+char *get_args(char *cmd_name, char *cmd)
+{
+	char *args = malloc(LSTR);
+	strcpy(args, cmd);
+	args = args + strlen(cmd_name) + 1;
+	return args;
+}
+
 
 void execute_cmd(char *cmd) {
 	if (cmd != NULL && strlen(cmd) > 0) {
@@ -37,8 +48,7 @@ void execute_cmd(char *cmd) {
 		return;
 	}
 	if (compare_command(CREATE, cmd)) {
-		/* Remove the command from the front of the string */
-		char *filename = cmd + strlen(CREATE) + 1;
+		char *filename = get_args(CREATE, cmd);
 		create(filename);
 	} else if (compare_command(CLEAR, cmd)) {
 		clear();
