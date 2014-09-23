@@ -29,7 +29,8 @@
 
 int compare_command(char *command, char *str)
 {
-	return strncmp(command, str, strlen(command)) == 0;
+	return strncmp(command, str, strlen(command)) == 0 &&
+		(str[strlen(command)] == ' ' || str[strlen(command)] == '\0');
 }
 
 char *get_args(char *cmd_name, char *cmd)
@@ -74,6 +75,8 @@ void execute_cmd(char *cmd) {
 		dd();
 	} else if (compare_command(QUIT, cmd)) {
 		quit();
+	} else {
+		printf("Command not found\n");
 	}
 }
 
