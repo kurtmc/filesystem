@@ -36,8 +36,7 @@ int compare_command(char *command, char *str)
 char *get_args(char *cmd_name, char *cmd)
 {
 	char *args = malloc(LSTR);
-	strcpy(args, cmd);
-	args = args + strlen(cmd_name) + 1;
+	strcpy(args, cmd + strlen(cmd_name) + 1);
 	return args;
 }
 
@@ -53,7 +52,7 @@ void execute_cmd(char *cmd) {
 	if (compare_command(PWD, cmd)) {
 		pwd();
 	} else if (compare_command(CD, cmd)) {
-		cd();
+		cd(get_args(CD, cmd));
 	} else if (compare_command(LS, cmd)) {
 		ls();
 	} else if (compare_command(RLS, cmd)) {

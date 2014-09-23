@@ -20,6 +20,15 @@ static char *get_fake_cwd()
 	}
 	return fake_cwd;
 }
+static void set_fake_cwd(char *wd)
+{
+	if (fake_cwd == NULL) {
+		fake_cwd = malloc(FILELEN * sizeof(char));
+		fake_cwd[0] = '\0';
+	}
+	strcpy(fake_cwd, wd);
+}
+
 
 char *get_real_root_dir() {
 	char cwd[1024];
@@ -34,14 +43,55 @@ char *get_real_root_dir() {
 
 	return full_path;
 }
+int directory_exists(char *dir)
+{
+	int result = 0;
+	struct dirent *next_file;
+
+	DIR *real_dir;
+
+	char *file_path;
+	file_path = malloc(FILELEN * sizeof(char));
+
+	real_dir = opendir(get_real_root_dir());
+
+	while (next_file = readdir(real_dir)) {
+		sprintf(file_path, "%s/%s", get_real_root_dir(),
+				next_file->d_name);
+		if (next_file->d_name[0] != '.')
+			if (strncmp(dir, next_file->d_name, strlen(dir)) == 0 &&
+					next_file->d_name[strlen(dir)] == '-')
+				result = 1;
+	}
+	closedir(real_dir);
+	return result;
+}
 /* Commands */
 
 void pwd()
 {
 	printf("%s\n", get_fake_cwd());
 }
-void cd()
+void cd(char *args)
 {
+	//printf("cd called args = |%s|\n", args);
+	if (args[0] == '\0') {
+		set_fake_cwd("-");
+	} else if (args[0] == '-') { /* Absolute */
+		/* Need to check that directory actually exists first */
+		if (directory_exists(args)) {
+			set_fake_cwd(args);
+		} else {
+			printf("Directory does not exist\n");
+		}
+	} else { /* Relative */
+		/* Convert to absolute and call recursively */
+		char *abs_path = malloc(1024);
+		strcpy(abs_path, get_fake_cwd());
+		strcat(abs_path, args);
+		//printf("abs_path = %s\n", abs_path);
+		cd(abs_path);
+	}
 }
 void ls() {
 	struct dirent *next_file;
@@ -62,7 +112,6 @@ void ls() {
 						&next_file->d_name[strlen(get_fake_cwd())]);
 	}
 	closedir(real_dir);
-
 }
 void rls()
 {

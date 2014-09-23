@@ -1,5 +1,5 @@
 void pwd();
-void cd();
+void cd(char *args);
 void ls();
 void rls();
 void tree();
