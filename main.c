@@ -75,6 +75,28 @@ int clear_real_dir()
 	return 0;
 }
 
+void ls() {
+	struct dirent *next_file;
+
+	DIR *real_dir;
+
+	char *file_path;
+	file_path = malloc(FILELEN * sizeof(char));
+
+	real_dir = opendir(get_real_root_dir());
+
+	while (next_file = readdir(real_dir)) {
+		sprintf(file_path, "%s/%s", get_real_root_dir(),
+				next_file->d_name);
+		if (next_file->d_name[0] != '.')
+			if (strncmp(get_fake_cwd(), next_file->d_name, strlen(get_fake_cwd())) == 0)
+				printf("%s\n",
+						&next_file->d_name[strlen(get_fake_cwd())]);
+	}
+	closedir(real_dir);
+
+}
+
 int compare_command(char *command, char *str)
 {
 	return strncmp(command, str, strlen(command)) == 0;
@@ -118,6 +140,8 @@ void execute_cmd(char *cmd) {
 		system(rls_cmd);
 	} else if (compare_command(QUIT, cmd)) {
 		exit(0);
+	} else if (compare_command(LS, cmd)) {
+		ls();
 	}
 
 }
