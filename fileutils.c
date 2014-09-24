@@ -71,3 +71,27 @@ char *get_next_filename(struct dir_info *inf)
 	closedir(inf->real_dir);
 	return NULL;
 }
+
+int compare (const void * a, const void * b)
+{
+	return strcmp(*(char**)a, *(char**)b);
+}
+
+char **get_all_filenames(char *dir_path_str)
+{
+	char **filenames = malloc(1024*sizeof(char *));
+	int index = 0;
+
+	struct dir_info *inf;
+	inf = create_dir_info(dir_path_str);
+	char *filename = malloc(1024 * sizeof(char));
+	while (filename = get_next_filename(inf)) {
+		/* Store all files names in list */
+		filenames[index] = malloc(1024*sizeof(char));
+		strcpy(filenames[index], filename);
+		index++;
+	}
+	filenames[index] = NULL; /* Last element is null */
+	qsort(filenames, index, sizeof(char*), compare);
+	return filenames;
+}

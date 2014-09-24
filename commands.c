@@ -122,6 +122,14 @@ void ls() {
 			}
 		}
 	}
+	printf("Test new filenames function\n");
+	char **filenames = get_all_filenames(get_real_root_dir());
+	int i = 0;
+	while (filenames[i]) {
+		printf("%s\n", filenames[i]);
+		i++;
+	}
+
 }
 void rls()
 {
