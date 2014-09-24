@@ -94,7 +94,7 @@ void cd(char *args)
 	}
 }
 void ls() {
-	struct dirent *next_file;
+	/*struct dirent *next_file;
 	DIR *real_dir;
 	char *file_path;
 	file_path = malloc(FILELEN * sizeof(char));
@@ -106,10 +106,10 @@ void ls() {
 		if (next_file->d_name[0] != '.') { /* Don't want . or .. */
 
 			/* Get files and directories in pwd */
-			if (strncmp(get_fake_cwd(), next_file->d_name, strlen(get_fake_cwd())) == 0) {
+			/*if (strncmp(get_fake_cwd(), next_file->d_name, strlen(get_fake_cwd())) == 0) {
 				/* List directories and files only */
 				//printf("filename = %s\n", &next_file->d_name[strlen(get_fake_cwd())]);
-				if (strpbrk(&next_file->d_name[strlen(get_fake_cwd())], "-") != NULL) {
+				/*if (strpbrk(&next_file->d_name[strlen(get_fake_cwd())], "-") != NULL) {
 					printf("d: %s\n", &next_file->d_name[strlen(get_fake_cwd())]);
 				} else {
 					printf("f: %s\n", &next_file->d_name[strlen(get_fake_cwd())]);
@@ -117,7 +117,21 @@ void ls() {
 			}
 		}
 	}
-	closedir(real_dir);
+	closedir(real_dir); */
+	char *cwd = get_fake_cwd();
+
+	struct dir_info *inf;
+	inf = create_dir_info(get_real_root_dir());
+	char *filename = malloc(1024 * sizeof(char));
+	while (filename = get_next_filename(inf)) {
+		if (filename[0] != '.') {
+			if (strpbrk(&filename[strlen(cwd)], "-") != NULL) {
+				printf("d: %s\n", &filename[strlen(cwd)]);
+			} else {
+				printf("f: %s\n", &filename[strlen(cwd)]);
+			}
+		}
+	}
 }
 void rls()
 {
