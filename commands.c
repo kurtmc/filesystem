@@ -95,21 +95,27 @@ void cd(char *args)
 }
 void ls() {
 	struct dirent *next_file;
-
 	DIR *real_dir;
-
 	char *file_path;
 	file_path = malloc(FILELEN * sizeof(char));
-
 	real_dir = opendir(get_real_root_dir());
 
 	while (next_file = readdir(real_dir)) {
 		sprintf(file_path, "%s/%s", get_real_root_dir(),
 				next_file->d_name);
-		if (next_file->d_name[0] != '.')
-			if (strncmp(get_fake_cwd(), next_file->d_name, strlen(get_fake_cwd())) == 0)
-				printf("%s\n",
-						&next_file->d_name[strlen(get_fake_cwd())]);
+		if (next_file->d_name[0] != '.') { /* Don't want . or .. */
+
+			/* Get files and directories in pwd */
+			if (strncmp(get_fake_cwd(), next_file->d_name, strlen(get_fake_cwd())) == 0) {
+				/* List directories and files only */
+				//printf("filename = %s\n", &next_file->d_name[strlen(get_fake_cwd())]);
+				if (strpbrk(&next_file->d_name[strlen(get_fake_cwd())], "-") != NULL) {
+					printf("d: %s\n", &next_file->d_name[strlen(get_fake_cwd())]);
+				} else {
+					printf("f: %s\n", &next_file->d_name[strlen(get_fake_cwd())]);
+				}
+			}
+		}
 	}
 	closedir(real_dir);
 }
