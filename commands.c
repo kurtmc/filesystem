@@ -1,5 +1,6 @@
 #include "commands.h"
 #include "fileutils.h"
+#include "stringutils.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -94,39 +95,28 @@ void cd(char *args)
 	}
 }
 void ls() {
-	/*struct dirent *next_file;
-	DIR *real_dir;
-	char *file_path;
-	file_path = malloc(FILELEN * sizeof(char));
-	real_dir = opendir(get_real_root_dir());
-
-	while (next_file = readdir(real_dir)) {
-		sprintf(file_path, "%s/%s", get_real_root_dir(),
-				next_file->d_name);
-		if (next_file->d_name[0] != '.') { /* Don't want . or .. */
-
-			/* Get files and directories in pwd */
-			/*if (strncmp(get_fake_cwd(), next_file->d_name, strlen(get_fake_cwd())) == 0) {
-				/* List directories and files only */
-				//printf("filename = %s\n", &next_file->d_name[strlen(get_fake_cwd())]);
-				/*if (strpbrk(&next_file->d_name[strlen(get_fake_cwd())], "-") != NULL) {
-					printf("d: %s\n", &next_file->d_name[strlen(get_fake_cwd())]);
-				} else {
-					printf("f: %s\n", &next_file->d_name[strlen(get_fake_cwd())]);
-				}
-			}
-		}
-	}
-	closedir(real_dir); */
 	char *cwd = get_fake_cwd();
+
+	char *last_dir_printed = malloc(1024 * sizeof(char));
+	last_dir_printed[0] = '\0';
+	char *dir_to_print = malloc(1024 * sizeof(char));
+	dir_to_print[0] = '\0';
+
 
 	struct dir_info *inf;
 	inf = create_dir_info(get_real_root_dir());
 	char *filename = malloc(1024 * sizeof(char));
 	while (filename = get_next_filename(inf)) {
 		if (filename[0] != '.') {
-			if (strpbrk(&filename[strlen(cwd)], "-") != NULL) {
-				printf("d: %s\n", &filename[strlen(cwd)]);
+			//printf("string is = %s\n", strpbrk(&filename[strlen(cwd)], "-"));
+			char *after_dir = strpbrk(&filename[strlen(cwd)], "-");
+			if (after_dir != NULL) {
+				strncpy(dir_to_print, &filename[strlen(cwd)], after_dir - &filename[strlen(cwd)]);
+				if (!compare_strings(last_dir_printed, dir_to_print)) {
+					printf("d: %s\n", dir_to_print);
+					last_dir_printed[0] = '\0';
+					strcpy(last_dir_printed, dir_to_print);
+				}
 			} else {
 				printf("f: %s\n", &filename[strlen(cwd)]);
 			}
