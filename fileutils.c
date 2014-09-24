@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <dirent.h> /* for struct dirnet */
 
 /* Function creates a new directory (if it does not already exist) with path current directory appended with
  * the directory "name", returns 0 on success
@@ -35,4 +36,38 @@ int create_file(char *name)
 {
 	FILE *fp = fopen(name, "ab+");
 	return fclose(fp);
+}
+
+/* Function that iterates over the file names in a given directory */
+struct dir_info {
+	char *dir_path;
+	DIR *real_dir;
+};
+
+struct dir_info *create_dir_info(char *dir_path_str)
+{
+	struct dir_info *inf = malloc(sizeof(struct dir_info));
+
+	inf->dir_path = malloc(1024*sizeof(char));
+	strcpy(inf->dir_path, dir_path_str);
+
+	inf->real_dir = opendir(dir_path_str);
+
+	return inf;
+}
+
+char *get_next_filename(struct dir_info *inf)
+{
+	struct dirent *next_file;
+
+	char *file_path;
+	file_path = malloc(1024 * sizeof(char));
+
+
+	if (next_file = readdir(inf->real_dir)) {
+		sprintf(file_path, "%s/%s", inf->dir_path, next_file->d_name);
+		return next_file->d_name;
+	}
+	closedir(inf->real_dir);
+	return NULL;
 }
