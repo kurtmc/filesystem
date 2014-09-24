@@ -108,7 +108,6 @@ void ls() {
 	char *filename = malloc(1024 * sizeof(char));
 	while (filename = get_next_filename(inf)) {
 		if (filename[0] != '.') {
-			//printf("string is = %s\n", strpbrk(&filename[strlen(cwd)], "-"));
 			char *after_dir = strpbrk(&filename[strlen(cwd)], "-");
 			if (after_dir != NULL) {
 				strncpy(dir_to_print, &filename[strlen(cwd)], after_dir - &filename[strlen(cwd)]);
@@ -122,11 +121,28 @@ void ls() {
 			}
 		}
 	}
-	printf("Test new filenames function\n");
+	last_dir_printed[0] = '\0';
+	
+	//printf("Test new filenames function\n");
 	char **filenames = get_all_filenames(get_real_root_dir());
 	int i = 0;
 	while (filenames[i]) {
-		printf("%s\n", filenames[i]);
+		if (filenames[i][0] != '.') {
+			char *after_dir = strpbrk(&filenames[i][strlen(cwd)], "-");
+			if (after_dir != NULL) {
+				strncpy(dir_to_print, &filenames[i][strlen(cwd)], after_dir - &filenames[i][strlen(cwd)]);
+				//printf("dir_to_print = %s\n", dir_to_print);
+				if (!compare_strings(last_dir_printed, dir_to_print)) {
+					printf("d: %s\n", dir_to_print);
+					last_dir_printed[0] = '\0';
+					strcpy(last_dir_printed, dir_to_print);
+				}
+			} else {
+				printf("f: %s\n", &filenames[i][strlen(cwd)]);
+			}
+		}
+
+
 		i++;
 	}
 
