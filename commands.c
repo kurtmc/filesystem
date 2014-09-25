@@ -115,35 +115,47 @@ void cd(char *args)
 		cd(abs_path);
 	}
 }
+
+/* Returns -1 if not found */
+int get_pos_of_nth_occurance_of(char* str, char c, int n)
+{
+	int i;
+	int count = 0;
+	for (i = 0; str[i] != '\0'; i++) {
+		if (str[i] == c) {
+			count++;
+			if (count == n) {
+				return i;
+			}
+		}
+	}
+	return -1;
+}
+
 void ls() {
 	char *cwd = get_fake_cwd();
 
 	char *last_dir_printed = malloc(1024 * sizeof(char));
 	last_dir_printed[0] = '\0';
-	char *dir_to_print = malloc(1024 * sizeof(char));
-	dir_to_print[0] = '\0';
+	char *to_print = malloc(1024 * sizeof(char));
+	to_print[0] = '\0';
 
 	char **filenames = get_all_filenames(get_real_root_dir());
 	int i = 0;
 	while (filenames[i]) {
-		if (filenames[i][0] != '.') {
-			char *after_dir = strpbrk(&filenames[i][strlen(cwd)], "-");
-			if (after_dir != NULL) {
-				int num_chars = after_dir - &filenames[i][strlen(cwd)];
-				strncpy(dir_to_print, &filenames[i][strlen(cwd)], num_chars);
-				dir_to_print[num_chars] = '\0';
-				//printf("dir_to_print = %s\n", dir_to_print);
-				if (!compare_strings(last_dir_printed, dir_to_print)) {
-					printf("d: %s\n", dir_to_print);
-					last_dir_printed[0] = '\0';
-					strcpy(last_dir_printed, dir_to_print);
+		if (filenames[i][0] != '.' && strncmp(filenames[i], cwd, strlen(cwd)) == 0) {
+			strcpy(to_print, &filenames[i][strlen(cwd)]);
+			int dash_pos = get_pos_of_nth_occurance_of(to_print, '-', 1);
+			if (dash_pos > 0) {
+				to_print[dash_pos] = '\0';
+				if (!compare_strings(last_dir_printed, to_print)) {
+					printf("d: %s\n", to_print);
+					strcpy(last_dir_printed, to_print);
 				}
 			} else {
-				printf("f: %s\n", &filenames[i][strlen(cwd)]);
+				printf("f: %s\n", to_print);
 			}
 		}
-
-
 		i++;
 	}
 
