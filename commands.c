@@ -46,7 +46,7 @@ char *get_real_root_dir() {
 }
 int directory_exists(char *dir)
 {
-	int result = 0;
+	/*int result = 0;
 	struct dirent *next_file;
 
 	DIR *real_dir;
@@ -65,7 +65,27 @@ int directory_exists(char *dir)
 				result = 1;
 	}
 	closedir(real_dir);
-	return result;
+	return result;*/
+
+
+	if (dir[strlen(dir)] == '-') {
+		char* fixed_dir = malloc(1024*sizeof(char));
+		strncpy(fixed_dir, dir, strlen(dir) - 1);
+		dir = fixed_dir;
+	}
+
+	char **filenames = get_all_filenames(get_real_root_dir());
+	int i = 0;
+	while (filenames[i]) {
+		if (filenames[i][0] != '.') {
+			if (strncmp(dir, filenames[i], strlen(dir)) == 0 &&
+					filenames[i][strlen(dir)] == '-')
+				return 1;
+		}
+
+		i++;
+	}
+	return 0;
 }
 /* Commands */
 
@@ -108,7 +128,9 @@ void ls() {
 		if (filenames[i][0] != '.') {
 			char *after_dir = strpbrk(&filenames[i][strlen(cwd)], "-");
 			if (after_dir != NULL) {
-				strncpy(dir_to_print, &filenames[i][strlen(cwd)], after_dir - &filenames[i][strlen(cwd)]);
+				int num_chars = after_dir - &filenames[i][strlen(cwd)];
+				strncpy(dir_to_print, &filenames[i][strlen(cwd)], num_chars);
+				dir_to_print[num_chars] = '\0';
 				//printf("dir_to_print = %s\n", dir_to_print);
 				if (!compare_strings(last_dir_printed, dir_to_print)) {
 					printf("d: %s\n", dir_to_print);
