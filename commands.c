@@ -44,42 +44,46 @@ char *get_real_root_dir() {
 
 	return full_path;
 }
+
+char *append_dash(char *path)
+{
+	printf("append_dash\n");
+	printf("path = %s\n", path);
+	if (path[strlen(path) - 1] != '-') {
+		printf("path does not end in -\n");
+		char* fixed_dir = malloc(1024*sizeof(char));
+		strncpy(fixed_dir, path, strlen(path));
+		fixed_dir[strlen(path)] = '-';
+		fixed_dir[strlen(path) + 1] = '\0';
+		return fixed_dir;
+	}
+	return path;
+}
+
 int directory_exists(char *dir)
 {
-	/*int result = 0;
-	struct dirent *next_file;
 
-	DIR *real_dir;
-
-	char *file_path;
-	file_path = malloc(FILELEN * sizeof(char));
-
-	real_dir = opendir(get_real_root_dir());
-
-	while (next_file = readdir(real_dir)) {
-		sprintf(file_path, "%s/%s", get_real_root_dir(),
-				next_file->d_name);
-		if (next_file->d_name[0] != '.')
-			if (strncmp(dir, next_file->d_name, strlen(dir)) == 0 &&
-					next_file->d_name[strlen(dir)] == '-')
-				result = 1;
-	}
-	closedir(real_dir);
-	return result;*/
-
-
-	if (dir[strlen(dir)] == '-') {
+	/* if it doesn't end in '-', append it */
+	/*if (dir[strlen(dir) - 1] != '-') {
 		char* fixed_dir = malloc(1024*sizeof(char));
-		strncpy(fixed_dir, dir, strlen(dir) - 1);
+		strncpy(fixed_dir, dir, strlen(dir));
+		fixed_dir[strlen(dir)] = '-';
+		fixed_dir[strlen(dir) + 1] = '\0';
 		dir = fixed_dir;
-	}
+
+	}*/
+	dir = append_dash(dir);
+	printf("dir = %s\n", dir);
 
 	char **filenames = get_all_filenames(get_real_root_dir());
 	int i = 0;
 	while (filenames[i]) {
 		if (filenames[i][0] != '.') {
+			//printf("dir = %s\n", dir);
+			//printf("filenames[%d] = %s\n", i, filenames[i]);
+
 			if (strncmp(dir, filenames[i], strlen(dir)) == 0 &&
-					filenames[i][strlen(dir)] == '-')
+					filenames[i][strlen(dir) - 1] == '-')
 				return 1;
 		}
 
@@ -101,6 +105,7 @@ void cd(char *args)
 	} else if (args[0] == '-') { /* Absolute */
 		/* Need to check that directory actually exists first */
 		if (directory_exists(args)) {
+			args = append_dash(args);
 			set_fake_cwd(args);
 		} else {
 			printf("Directory does not exist\n");
