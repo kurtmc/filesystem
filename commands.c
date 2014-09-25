@@ -98,6 +98,22 @@ void cd(char *args)
 	//printf("cd called args = |%s|\n", args);
 	if (args[0] == '\0') {
 		set_fake_cwd("-");
+	} else if (compare_strings(args, "..")) {
+		char *cwd = get_fake_cwd();
+		if (compare_strings(cwd, "-")) {
+				return;
+		} else {
+			int i;
+			int count = 0;
+			for (i = strlen(cwd) - 1; i >= 0; i--) {
+				if (cwd[i] == '-') {
+					count++;
+					if (count == 2) {
+						cwd[i + 1] = '\0';
+					}
+				}
+			}
+		}
 	} else if (args[0] == '-') { /* Absolute */
 		/* Need to check that directory actually exists first */
 		if (directory_exists(args)) {
