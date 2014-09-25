@@ -47,10 +47,7 @@ char *get_real_root_dir() {
 
 char *append_dash(char *path)
 {
-	printf("append_dash\n");
-	printf("path = %s\n", path);
 	if (path[strlen(path) - 1] != '-') {
-		printf("path does not end in -\n");
 		char* fixed_dir = malloc(1024*sizeof(char));
 		strncpy(fixed_dir, path, strlen(path));
 		fixed_dir[strlen(path)] = '-';
@@ -73,7 +70,6 @@ int directory_exists(char *dir)
 
 	}*/
 	dir = append_dash(dir);
-	printf("dir = %s\n", dir);
 
 	char **filenames = get_all_filenames(get_real_root_dir());
 	int i = 0;
