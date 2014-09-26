@@ -76,6 +76,25 @@ int directory_exists(char *dir)
 	}
 	return 0;
 }
+
+char *get_absolute(char *fake_file) {
+	if (fake_file[0] == '-')
+		return fake_file;
+
+	char *filename = malloc(1024*sizeof(char));
+	strcpy(filename, get_fake_cwd());
+	strcat(filename, fake_file);
+	return filename;
+}
+
+char *get_real_filename(char *filename) {
+	char *real_filename = malloc(1024*sizeof(char));
+	strcpy(real_filename, get_real_root_dir());
+	strcat(real_filename, "/");
+	strcat(real_filename, get_absolute(filename));
+	return real_filename;
+}
+
 /* Commands */
 
 void pwd()
@@ -119,8 +138,14 @@ void cd(char *args)
 	}
 }
 
-void ls() {
-	char *cwd = get_fake_cwd();
+void ls(char *fake_dir) {
+	char *cwd;
+	if (fake_dir[0] != '\0') {
+		cwd = get_absolute(fake_dir);
+		strcat(cwd, "-");
+	} else {
+		cwd = get_fake_cwd();
+	}
 
 	char *last_dir_printed = malloc(1024 * sizeof(char));
 	last_dir_printed[0] = '\0';
@@ -200,11 +225,7 @@ void create(char *filename)
 void add(char *fake_file, char *str)
 {
 	/* get real filename */
-	char *filename = malloc(1024*sizeof(char));
-	strcpy(filename, get_real_root_dir());
-	strcat(filename, "/");
-	strcat(filename, get_fake_cwd());
-	strcat(filename, fake_file);
+	char *filename = get_real_filename(fake_file);
 	FILE *file = fopen(filename, "a");
 	fprintf(file, "%s", str);
 	fclose(file);
@@ -212,11 +233,7 @@ void add(char *fake_file, char *str)
 void cat(char *fake_file)
 {
 	/* get real filename */
-	char *filename = malloc(1024*sizeof(char));
-	strcpy(filename, get_real_root_dir());
-	strcat(filename, "/");
-	strcat(filename, get_fake_cwd());
-	strcat(filename, fake_file);
+	char *filename = get_real_filename(fake_file);
 	FILE *file = fopen(filename, "r");
 	char c;
 	if (file) {

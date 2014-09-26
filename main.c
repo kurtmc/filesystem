@@ -56,7 +56,8 @@ void execute_cmd(char *cmd) {
 	} else if (compare_command(CD, cmd)) {
 		cd(get_args(CD, cmd));
 	} else if (compare_command(LS, cmd)) {
-		ls();
+		char *filename = get_args(LS, cmd);
+		ls(filename);
 	} else if (compare_command(RLS, cmd)) {
 		rls();
 	} else if (compare_command(TREE, cmd)) {
