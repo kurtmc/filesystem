@@ -60,23 +60,12 @@ char *append_dash(char *path)
 int directory_exists(char *dir)
 {
 
-	/* if it doesn't end in '-', append it */
-	/*if (dir[strlen(dir) - 1] != '-') {
-		char* fixed_dir = malloc(1024*sizeof(char));
-		strncpy(fixed_dir, dir, strlen(dir));
-		fixed_dir[strlen(dir)] = '-';
-		fixed_dir[strlen(dir) + 1] = '\0';
-		dir = fixed_dir;
-
-	}*/
 	dir = append_dash(dir);
 
 	char **filenames = get_all_filenames(get_real_root_dir());
 	int i = 0;
 	while (filenames[i]) {
 		if (filenames[i][0] != '.') {
-			//printf("dir = %s\n", dir);
-			//printf("filenames[%d] = %s\n", i, filenames[i]);
 
 			if (strncmp(dir, filenames[i], strlen(dir)) == 0 &&
 					filenames[i][strlen(dir) - 1] == '-')
@@ -95,7 +84,6 @@ void pwd()
 }
 void cd(char *args)
 {
-	//printf("cd called args = |%s|\n", args);
 	if (args[0] == '\0') {
 		set_fake_cwd("-");
 	} else if (compare_strings(args, "..")) {
@@ -127,7 +115,6 @@ void cd(char *args)
 		char *abs_path = malloc(1024);
 		strcpy(abs_path, get_fake_cwd());
 		strcat(abs_path, args);
-		//printf("abs_path = %s\n", abs_path);
 		cd(abs_path);
 	}
 }

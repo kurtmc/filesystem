@@ -72,10 +72,8 @@ void execute_cmd(char *cmd) {
 
 		char *filename = malloc(1024*sizeof(char));
 		strncpy(filename, args, space_1_pos);
-		//printf("filename = %s\n", filename);
 		char *string_to_add = malloc(1024*sizeof(char));
 		strcpy(string_to_add, &args[space_1_pos + 1]);
-		//printf("string_to_add = %s\n", string_to_add);
 
 		add(filename, string_to_add);
 	} else if (compare_command(CAT, cmd)) {
