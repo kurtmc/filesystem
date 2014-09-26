@@ -1,3 +1,8 @@
+/* 
+ * Name: Kurt McAlpine
+ * UPI: kmca733
+ * ID: 2004750
+ */
 #include "stringutils.h"
 #include <string.h>
 

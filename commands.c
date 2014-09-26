@@ -1,3 +1,8 @@
+/* 
+ * Name: Kurt McAlpine
+ * UPI: kmca733
+ * ID: 2004750
+ */
 #include "commands.h"
 #include "fileutils.h"
 #include "stringutils.h"
@@ -181,7 +186,7 @@ void rls()
 	strcat(rls_cmd, get_real_root_dir());
 	system(rls_cmd);
 }
-void tree()
+void tree(char *fake_dir)
 {
 }
 void clear()
@@ -243,11 +248,13 @@ void cat(char *fake_file)
 	}
 	putchar('\n');
 }
-void delete()
+void delete(char *fake_file)
 {
+	fake_file = get_absolute(fake_file);
 }
-void dd()
+void dd(char *fake_dir)
 {
+	fake_dir = get_absolute(fake_dir);
 }
 void quit()
 {

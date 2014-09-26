@@ -2,6 +2,8 @@
  * Name: Kurt McAlpine
  * UPI: kmca733
  * ID: 2004750
+ *
+ * Implementing this in c was a terrible idea, do not recommend
  */
 
 #include <stdlib.h>
