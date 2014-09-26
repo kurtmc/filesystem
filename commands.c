@@ -132,22 +132,6 @@ void cd(char *args)
 	}
 }
 
-/* Returns -1 if not found */
-int get_pos_of_nth_occurance_of(char* str, char c, int n)
-{
-	int i;
-	int count = 0;
-	for (i = 0; str[i] != '\0'; i++) {
-		if (str[i] == c) {
-			count++;
-			if (count == n) {
-				return i;
-			}
-		}
-	}
-	return -1;
-}
-
 void ls() {
 	char *cwd = get_fake_cwd();
 
@@ -226,11 +210,34 @@ void create(char *filename)
 		create_file(full_name);
 	}
 }
-void add()
+void add(char *fake_file, char *str)
 {
+	/* get real filename */
+	char *filename = malloc(1024*sizeof(char));
+	strcpy(filename, get_real_root_dir());
+	strcat(filename, "/");
+	strcat(filename, get_fake_cwd());
+	strcat(filename, fake_file);
+	FILE *file = fopen(filename, "a");
+	fprintf(file, "%s", str);
+	fclose(file);
 }
-void cat()
+void cat(char *fake_file)
 {
+	/* get real filename */
+	char *filename = malloc(1024*sizeof(char));
+	strcpy(filename, get_real_root_dir());
+	strcat(filename, "/");
+	strcat(filename, get_fake_cwd());
+	strcat(filename, fake_file);
+	FILE *file = fopen(filename, "r");
+	char c;
+	if (file) {
+		while ((c = getc(file)) != EOF)
+			putchar(c);
+		fclose(file);
+	}
+	putchar('\n');
 }
 void delete()
 {
