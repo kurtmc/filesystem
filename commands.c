@@ -83,6 +83,7 @@ int directory_exists(char *dir)
 }
 
 char *get_absolute(char *fake_file) {
+	//printf("get_absolute\n");
 	if (fake_file[0] == '-')
 		return fake_file;
 
@@ -199,8 +200,69 @@ void rls()
 	}
 	pclose(fp);
 }
-void tree(char *fake_dir)
+
+void indent(int depth) {
+	int i;
+	for(i = 0; i < depth; i++) {
+		printf(" ");
+	}
+}
+
+void tree(char *fake_dir, int depth)
 {
+	char *cwd;
+	if (fake_dir[0] != '\0') {
+		cwd = get_absolute(fake_dir);
+		if (cwd[strlen(cwd) - 1] != '-') {
+			strcat(cwd, "-");
+		}
+	} else {
+		cwd = get_fake_cwd();
+	}
+
+	//cd(cwd);
+
+	//printf("gotten cwd\n");
+
+	/* First print cwd */
+	indent(depth*4);
+	printf("%s\n", cwd);
+	indent(depth*4);
+	int j;
+	for (j = 0; j < strlen(cwd); j++) {
+		printf("-");
+	}
+	printf("\n");
+
+
+	char *last_dir_printed = malloc(1024 * sizeof(char));
+	last_dir_printed[0] = '\0';
+	char *to_print = malloc(1024 * sizeof(char));
+	to_print[0] = '\0';
+
+	char **filenames = get_all_filenames(get_real_root_dir());
+	int i = 0;
+	while (filenames[i]) {
+		if (filenames[i][0] != '.' && strncmp(filenames[i], cwd, strlen(cwd)) == 0) {
+			strcpy(to_print, &filenames[i][strlen(cwd)]);
+			int dash_pos = get_pos_of_nth_occurance_of(to_print, '-', 1);
+			if (dash_pos > 0) {
+				to_print[dash_pos] = '\0';
+				if (!compare_strings(last_dir_printed, to_print)) {
+					//printf("d: %s\n", to_print);
+					strcpy(last_dir_printed, to_print);
+					cd(to_print);
+					tree(get_fake_cwd(), depth + 1);
+					cd("..");
+				}
+			} else {
+				/* Print out the file */
+				indent(depth*4);
+				printf("%s\n", to_print);
+			}
+		}
+		i++;
+	}
 }
 void clear()
 {

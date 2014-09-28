@@ -7,7 +7,7 @@ void pwd();
 void cd(char *args);
 void ls(char *fake_dir);
 void rls();
-void tree(char *fake_dir);
+void tree(char *fake_dir, int depth);
 void clear();
 void create(char *filename);
 void add(char *fake_file, char *str);
