@@ -244,6 +244,8 @@ void add(char *fake_file, char *str)
 {
 	/* get real filename */
 	char *filename = get_real_filename(fake_file);
+	//printf("real filename = %s\n", filename);
+	//printf("last char = %d\n", filename[strlen(filename) - 1]);
 	FILE *file = fopen(filename, "a");
 	fprintf(file, "%s", str);
 	fclose(file);

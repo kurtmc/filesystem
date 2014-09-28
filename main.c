@@ -75,6 +75,9 @@ void execute_cmd(char *cmd) {
 
 		char *filename = malloc(1024*sizeof(char));
 		strncpy(filename, args, space_1_pos);
+		filename[strlen(filename) - 1] = '\0';
+		//printf("main.c filename last char = %d\n",
+				//filename[strlen(filename) - 1]);
 		char *string_to_add = malloc(1024*sizeof(char));
 		strcpy(string_to_add, &args[space_1_pos + 1]);
 
