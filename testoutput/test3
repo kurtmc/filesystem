@@ -1,35 +1,3 @@
-total 0
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -fileA
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -fileB
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -rrrr-dd-aaaa-file0
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -rrrr-dd-aaaa-file1
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -rrrr-dd-aaaa-file2
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -rrrr-dd-aaaa-file3
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -rrrr-dd-aaaa-file4
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -rrrr-dd-file0
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -rrrr-dd-file1
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -rrrr-file0
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -rrrr-file1
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -rrrr-file2
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -xx-file0
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -xx-file1
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -xx-file2
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -xx-o-aaa-file0
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -xx-o-aaa-file1
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -xx-o-aaa-file2
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -xx-o-aaa-file3
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -xx-o-aaa-file4
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -xx-o-aaa-xx-file0
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -xx-o-aaa-xx-file1
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -xx-o-aaa-xx-file2
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -xx-o-aaa-xx-file3
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -xx-o-aaa-xx-file4
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -xx-o-aaa-xx-file5
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -xx-o-file0
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -xx-o-file1
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -xx-o-file2
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -xx-o-file3
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -xx-o-file4
 ffs> clear
 ffs> create -fileA
 ffs> create -fileB
@@ -68,6 +36,38 @@ f: fileB
 d: rrrr
 d: xx
 ffs> rls
+total 0
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -fileA
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -fileB
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -rrrr-dd-aaaa-file0
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -rrrr-dd-aaaa-file1
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -rrrr-dd-aaaa-file2
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -rrrr-dd-aaaa-file3
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -rrrr-dd-aaaa-file4
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -rrrr-dd-file0
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -rrrr-dd-file1
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -rrrr-file0
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -rrrr-file1
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -rrrr-file2
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -xx-file0
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -xx-file1
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -xx-file2
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -xx-o-aaa-file0
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -xx-o-aaa-file1
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -xx-o-aaa-file2
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -xx-o-aaa-file3
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -xx-o-aaa-file4
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -xx-o-aaa-xx-file0
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -xx-o-aaa-xx-file1
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -xx-o-aaa-xx-file2
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -xx-o-aaa-xx-file3
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -xx-o-aaa-xx-file4
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -xx-o-aaa-xx-file5
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -xx-o-file0
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -xx-o-file1
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -xx-o-file2
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -xx-o-file3
+-rw-r--r-- 1 kurt users 0 Sep 28 16:52 -xx-o-file4
 ffs> cd rrrr-dd-
 ffs> pwd
 -rrrr-dd-

@@ -64,7 +64,8 @@ void execute_cmd(char *cmd) {
 		rls();
 	} else if (compare_command(TREE, cmd)) {
 		//printf("Tree cmd\n");
-		tree("\0", 0);
+		char *filename = get_args(TREE, cmd);
+		tree(filename, 0);
 	} else if (compare_command(CLEAR, cmd)) {
 		clear();
 	} else if (compare_command(CREATE, cmd)) {

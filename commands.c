@@ -210,8 +210,15 @@ void indent(int depth) {
 
 void tree(char *fake_dir, int depth)
 {
+	char *previous_cwd = malloc(1024*sizeof(char));
+	if (depth == 0) {
+		strcpy(previous_cwd, get_fake_cwd());
+		//printf("previous is %s\n", previous_cwd);
+		cd(fake_dir);
+	}
+
 	char *cwd;
-	if (fake_dir[0] != '\0') {
+	if (fake_dir[0] != '\0' && depth != 0) {
 		cwd = get_absolute(fake_dir);
 		if (cwd[strlen(cwd) - 1] != '-') {
 			strcat(cwd, "-");
@@ -262,6 +269,10 @@ void tree(char *fake_dir, int depth)
 			}
 		}
 		i++;
+	}
+	if (depth == 0) {
+		//printf("cd back to %s\n", previous_cwd);
+		cd(previous_cwd);
 	}
 }
 void clear()
