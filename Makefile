@@ -12,3 +12,4 @@ OBJ = main.o fileutils.o commands.o stringutils.o
 
 A2com: $(OBJ)
 	gcc -o $@ $^ $(CFLAGS)
+

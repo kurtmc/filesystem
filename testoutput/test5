@@ -1,0 +1,26 @@
+ffs> clear
+ffs> create -xx-file0
+ffs> create -xx-file1
+ffs> create -xx-file2
+ffs> create -xx-o-file0
+ffs> create -xx-o-file1
+ffs> create -xx-o-file2
+ffs> create -xx-o-file3
+ffs> create -xx-o-file4
+ffs> create -xx-o-aaa-file0
+ffs> create -xx-o-aaa-xx-file1
+ffs> ls xx
+f: file0
+f: file1
+f: file2
+d: o
+ffs> tree xx
+ffs> delete xx-file1
+ffs> cd xx
+ffs> ls
+f: file0
+f: file1
+f: file2
+d: o
+ffs> tree
+ffs> quit
