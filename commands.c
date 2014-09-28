@@ -184,7 +184,20 @@ void rls()
 	rls_cmd[0] = '\0';
 	strcpy(rls_cmd, "ls -l ");
 	strcat(rls_cmd, get_real_root_dir());
-	system(rls_cmd);
+	//system(rls_cmd);
+
+	char file_type[40];
+
+	FILE *fp = popen(rls_cmd, "r");
+	if (fp == NULL) {
+		printf("rls failed");
+		exit -1;
+	}
+
+	while(fgets(file_type, sizeof(file_type), fp) != NULL) {
+		printf("%s", file_type);
+	}
+	pclose(fp);
 }
 void tree(char *fake_dir)
 {
