@@ -88,9 +88,11 @@ void execute_cmd(char *cmd) {
 		char *filename = get_args(CAT, cmd);
 		cat(filename);
 	} else if (compare_command(DELETE, cmd)) {
-		delete();
+		char *filename = get_args(DELETE, cmd);
+		delete(filename);
 	} else if (compare_command(DD, cmd)) {
-		dd();
+		char *filename = get_args(DD, cmd);
+		dd(filename);
 	} else if (compare_command(QUIT, cmd)) {
 		quit();
 	} else {

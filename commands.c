@@ -338,11 +338,16 @@ void cat(char *fake_file)
 }
 void delete(char *fake_file)
 {
-	fake_file = get_absolute(fake_file);
+	char *real_filename = get_real_filename(fake_file);
+	int status = remove(real_filename);
+	if (status != 0)
+		printf("Could not delete that file\n");
+	//printf("Delete = (%s)\n", fake_file);
 }
 void dd(char *fake_dir)
 {
 	fake_dir = get_absolute(fake_dir);
+	printf("Delete = (%s)\n", fake_dir);
 }
 void quit()
 {
