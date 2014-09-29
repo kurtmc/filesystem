@@ -32,15 +32,15 @@ ffs> create -xx-o-aaa-xx-file4
 ffs> create -xx-o-aaa-xx-file5
 ffs> tree
 -
--
+=
 fileA
 fileB
     -rrrr-
-    ------
+    ======
         -rrrr-dd-
-        ---------
+        =========
             -rrrr-dd-aaaa-
-            --------------
+            ==============
             file0
             file1
             file2
@@ -52,21 +52,21 @@ fileB
     file1
     file2
     -xx-
-    ----
+    ====
     file0
     file1
     file2
         -xx-o-
-        ------
+        ======
             -xx-o-aaa-
-            ----------
+            ==========
             file0
             file1
             file2
             file3
             file4
                 -xx-o-aaa-xx-
-                -------------
+                =============
                 file0
                 file1
                 file2
@@ -80,14 +80,14 @@ fileB
         file4
 ffs> tree -xx-o-aaa
 -xx-o-aaa-
-----------
+==========
 file0
 file1
 file2
 file3
 file4
     -xx-o-aaa-xx-
-    -------------
+    =============
     file0
     file1
     file2
