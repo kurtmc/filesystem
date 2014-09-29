@@ -1,13 +1,10 @@
-total 0
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -one-two-thr ee
-total 0
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -one-two-fo ur-five
--rw-r--r-- 1 kurt users 0 Sep 28 15:44 -one-two-thr ee
 ffs> clear
 ffs> create -one-two-thr ee
 ffs> ls
 d: one
 ffs> rls
+total 0
+-rw-r--r-- 1 kurt users 0 Sep 28 12:34 -one-two-thr ee
 ffs> cd one-two
 ffs> ls
 f: thr ee
@@ -18,4 +15,7 @@ f: thr ee
 ffs> ls fo ur
 f: five
 ffs> rls
+total 0
+-rw-r--r-- 1 kurt users 0 Sep 28 12:34 -one-two-fo ur-five
+-rw-r--r-- 1 kurt users 0 Sep 28 12:34 -one-two-thr ee
 ffs> quit

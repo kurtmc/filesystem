@@ -15,6 +15,24 @@ f: file1
 f: file2
 d: o
 ffs> tree xx
+-xx-
+----
+file0
+file1
+file2
+    -xx-o-
+    ------
+        -xx-o-aaa-
+        ----------
+        file0
+            -xx-o-aaa-xx-
+            -------------
+            file1
+    file0
+    file1
+    file2
+    file3
+    file4
 ffs> delete xx-file1
 ffs> cd xx
 ffs> ls
@@ -23,4 +41,24 @@ f: file1
 f: file2
 d: o
 ffs> tree
+-
+-
+    -xx-
+    ----
+    file0
+    file1
+    file2
+        -xx-o-
+        ------
+            -xx-o-aaa-
+            ----------
+            file0
+                -xx-o-aaa-xx-
+                -------------
+                file1
+        file0
+        file1
+        file2
+        file3
+        file4
 ffs> quit

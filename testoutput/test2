@@ -12,6 +12,6 @@ f: fileA
 f: fileB
 ffs> rls
 total 8
--rw-r--r-- 1 kurt users 30 Sep 28 16:16 -fileA
--rw-r--r-- 1 kurt users 30 Sep 28 16:16 -fileB
+-rw-r--r-- 1 kurt users 30 Sep 28 12:34 -fileA
+-rw-r--r-- 1 kurt users 30 Sep 28 12:34 -fileB
 ffs> quit

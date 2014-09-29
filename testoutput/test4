@@ -79,51 +79,19 @@ fileB
         file3
         file4
 ffs> tree -xx-o-aaa
--
--
-fileA
-fileB
-    -rrrr-
-    ------
-        -rrrr-dd-
-        ---------
-            -rrrr-dd-aaaa-
-            --------------
-            file0
-            file1
-            file2
-            file3
-            file4
-        file0
-        file1
+-xx-o-aaa-
+----------
+file0
+file1
+file2
+file3
+file4
+    -xx-o-aaa-xx-
+    -------------
     file0
     file1
     file2
-    -xx-
-    ----
-    file0
-    file1
-    file2
-        -xx-o-
-        ------
-            -xx-o-aaa-
-            ----------
-            file0
-            file1
-            file2
-            file3
-            file4
-                -xx-o-aaa-xx-
-                -------------
-                file0
-                file1
-                file2
-                file3
-                file4
-                file5
-        file0
-        file1
-        file2
-        file3
-        file4
+    file3
+    file4
+    file5
 ffs> quit
