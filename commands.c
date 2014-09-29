@@ -345,8 +345,22 @@ void delete(char *fake_file)
 }
 void dd(char *fake_dir)
 {
-	fake_dir = get_absolute(fake_dir);
-	printf("Delete = (%s)\n", fake_dir);
+	char *abs_fake_dir = get_absolute(fake_dir);
+
+	char **filenames = get_all_filenames(get_real_root_dir());
+	int i = 0;
+	while (filenames[i]) {
+		if (filenames[i][0] != '.') {
+			//printf("filename = %s\n", filenames[i]);
+
+			if (strncmp(abs_fake_dir, filenames[i], strlen(abs_fake_dir)) == 0 &&
+					filenames[i][strlen(abs_fake_dir)] == '-') {
+				remove(get_real_filename(filenames[i]));
+			}
+		}
+
+		i++;
+	}
 }
 void quit()
 {
