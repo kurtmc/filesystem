@@ -211,7 +211,10 @@ void indent(int depth) {
 void tree(char *fake_dir, int depth)
 {
 	char *previous_cwd = malloc(1024*sizeof(char));
-	if (depth == 0) {
+	int back_previous = 0;
+	if (depth == 0 && fake_dir[0] != '\0') { /* on first call and fake_dir
+						    has argument */
+		back_previous = 1;
 		strcpy(previous_cwd, get_fake_cwd());
 		//printf("previous is %s\n", previous_cwd);
 		cd(fake_dir);
@@ -226,10 +229,6 @@ void tree(char *fake_dir, int depth)
 	} else {
 		cwd = get_fake_cwd();
 	}
-
-	//cd(cwd);
-
-	//printf("gotten cwd\n");
 
 	/* First print cwd */
 	indent(depth*4);
@@ -270,7 +269,7 @@ void tree(char *fake_dir, int depth)
 		}
 		i++;
 	}
-	if (depth == 0) {
+	if (depth == 0 && back_previous) {
 		//printf("cd back to %s\n", previous_cwd);
 		cd(previous_cwd);
 	}
