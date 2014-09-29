@@ -237,7 +237,7 @@ void tree(char *fake_dir, int depth)
 	indent(depth*4);
 	int j;
 	for (j = 0; j < strlen(cwd); j++) {
-		printf("-");
+		printf("=");
 	}
 	printf("\n");
 
