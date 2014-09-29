@@ -3,9 +3,9 @@ UPI: kmca733
 ID: 2004750
 
 Answers:
-1. I was going to assume that the univeristy computes use the ext4 filesystem because it is the default
-file system for many Linux ditros, but I ran the df -T command on the machines you can ssh to make sure.
-It turns out there are 4 filesystem types used (none of them are ext4). They are, ext3, tmpfs, afs and
+1. I was going to assume that the university computes use the ext4 file system because it is the default
+file system for many Linux distros, but I ran the df -T command on the machines you can ssh to make sure.
+It turns out there are 4 file system types used (none of them are ext4). They are, ext3, tmpfs, afs and
 cifs.
 
 ext3 has a maximum filename length of 255 bytes
@@ -14,17 +14,17 @@ AFSNAMEMAX and it is defined as 256 but one of those bytes would have to be null
 cifs may be limited by the NTFS file name length which is 255 bytes
 (I couldn't find any filename length limit information on tmpfs)
 
-2. Flat filesystems are easier to implement, there is no need to explicitly create and maintain a tree data structure.
-The implementation of the create command is very easy in this flat filesystem, all that was need was to prepend the 
+2. Flat file systems are easier to implement, there is no need to explicitly create and maintain a tree data structure.
+The implementation of the create command is very easy in this flat file system, all that was need was to prepend the 
 relative path argument with the current working directory to get the real filename that would be created, and if the
-argument was an abolute path the nothing needed to be prepended.
+argument was an absolute path the nothing needed to be prepended.
 
 3. One disadvantage is that the there is a small limit on how many directories can be put inside each other due to
-the underlying filesystem filename character limit of 255 there will be a very small limit to the depth of directories.
+the underlying file system filename character limit of 255 there will be a very small limit to the depth of directories.
 
-Another disadvantage I found when implementing my filesystem is the fact that I iterate over every file to match filenames,
+Another disadvantage I found when implementing my file system is the fact that I iterate over every file to match filenames,
 so there is a lot of wasted cycles iterating through filenames in a particular directory when for instance ls is running with
 an argument.
 
-4. One way to minimise wasted cycles would be to maintain a tree in memory that contains information about the filesystem,
+4. One way to minimise wasted cycles would be to maintain a tree in memory that contains information about the file system,
 the tree could be more efficiently traversed to ls a particular directory.
