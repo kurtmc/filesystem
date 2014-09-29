@@ -9,3 +9,6 @@ A2dir
 
 #Vim files
 *.swp
+
+# Compressed folder
+*.zip
